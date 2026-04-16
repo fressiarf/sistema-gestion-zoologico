@@ -1,0 +1,138 @@
+Proyecto: Sistema de Gestión de Zoológico (POO + LocalStorage) 
+Descripción 
+Un zoológico necesita un sistema sencillo que permita administrar los animales que habitan en él y los usuarios que tienen acceso al sistema. 
+El objetivo del proyecto es aplicar los conceptos de Programación Orientada a Objetos (POO) en JavaScript, utilizando clases, herencia y relaciones entre objetos. 
+El sistema utilizará localStorage para almacenar la información de usuarios y animales, permitiendo mantener los datos incluso después de recargar la aplicación. 
+Requisitos del sistema 
+El sistema debe permitir gestionar: 
+● Usuarios del sistema 
+● Animales del zoológico 
+● Diferentes tipos de animales utilizando herencia 
+La información debe almacenarse utilizando localStorage. 
+Estructura de datos 
+El sistema debe trabajar con dos conjuntos principales de datos: 
+● Usuarios 
+● Animales 
+Ambos deben almacenarse utilizando localStorage.
+Clases del sistema 
+El sistema debe estar estructurado utilizando Programación Orientada a Objetos. Se deben implementar las siguientes clases. 
+1. Clase Zoológico 
+Representa el zoológico que contiene los animales del sistema. Debe contener: 
+● Un atributo nombre 
+● Una lista de animales 
+Debe implementar los siguientes métodos: 
+● agregarAnimal(animal) 
+● eliminarAnimal(id) 
+● listarAnimales() 
+● buscarAnimal(id) 
+● mostrarInformacion() 
+2. Clase Animal 
+Clase base para representar cualquier animal del zoológico. 
+Debe contener: 
+● id 
+● nombre 
+● especie 
+● clase del animal 
+Debe implementar los siguientes métodos: 
+● mostrarInformacion() 
+● getNombre() 
+● getEspecie() 
+● getClase()
+3. Clase Mamífero 
+Debe heredar de la clase Animal. 
+Debe contener: 
+● Un atributo que identifique al animal como mamífero Debe implementar los siguientes métodos: 
+● emitirSonido() 
+● tipoMovimiento() 
+● mostrarInformacion() 
+4. Clase Ave 
+Debe heredar de la clase Animal. 
+Debe contener: 
+● Un atributo que identifique al animal como ave Debe implementar los siguientes métodos: 
+● emitirSonido() 
+● volar() 
+● mostrarInformacion() 
+5. Clase Reptil 
+Debe heredar de la clase Animal. 
+Debe contener: 
+● Un atributo que identifique al animal como reptil Debe implementar los siguientes métodos: 
+● emitirSonido() 
+● desplazarse() 
+● mostrarInformacion()
+Clase Usuario 
+Representa a los usuarios que pueden acceder al sistema. Debe contener: 
+● id 
+● username 
+● password 
+● rol 
+Debe implementar los siguientes métodos: 
+● iniciarSesion() 
+● cerrarSesion() 
+● mostrarInformacion() 
+● getRol() 
+Sistema de autenticación 
+El sistema debe permitir gestionar usuarios del sistema. 
+Debe implementarse un módulo de autenticación con los siguientes métodos: 
+● registrarUsuario() 
+● login() 
+● logout() 
+● obtenerUsuarioActual() 
+● verificarSesion() 
+Gestión de animales (LocalStorage) 
+La información de los animales debe almacenarse utilizando localStorage. Se deben implementar métodos para gestionar los datos: 
+● guardarAnimales() 
+● obtenerAnimales() 
+● obtenerAnimalPorId(id) 
+● crearAnimal(animal) 
+● actualizarAnimal(id, animal) 
+● eliminarAnimal(id)
+Gestión de usuarios (LocalStorage) 
+La información de los usuarios debe almacenarse utilizando localStorage. Se deben implementar métodos para gestionar los datos: 
+● guardarUsuarios() 
+● obtenerUsuarios() 
+● buscarUsuario(username) 
+● registrarUsuario(usuario) 
+● validarCredenciales(username, password) 
+Identificación de clases 
+El sistema debe identificar el tipo de animal utilizando el atributo que representa la clase del animal. 
+Debe existir un método responsable de crear el objeto correspondiente. Método requerido: 
+● crearObjetoAnimal(dataAnimal) 
+Este método debe generar una instancia de la clase correspondiente según el tipo de animal. 
+Funcionalidades del sistema 
+El sistema debe permitir realizar las siguientes acciones: 
+1. Registrar un nuevo usuario 
+2. Iniciar sesión 
+3. Mostrar la lista de animales del zoológico 
+4. Identificar la clase del animal utilizando objetos de las clases definidas 5. Agregar nuevos animales al zoológico 
+6. Eliminar animales del zoológico 
+7. Actualizar información de un animal 
+8. Cerrar sesión del usuario
+Persistencia de datos 
+La información del sistema debe almacenarse utilizando localStorage. Esto permitirá mantener guardados los datos de: 
+● Usuarios 
+● Animales 
+incluso después de recargar la aplicación. 
+Importante: 
+Aunque se utilice localStorage para guardar información, el sistema debe mantener una estructura basada en Programación Orientada a Objetos. 
+Es decir: 
+● localStorage se utilizará únicamente para guardar y recuperar datos. ● La lógica del sistema debe estar basada en clases y objetos. 
+Requisitos adicionales 
+El proyecto debe cumplir con los siguientes criterios: 
+● Utilizar clases en JavaScript 
+● Implementar herencia entre clases 
+● Utilizar localStorage para persistencia de datos 
+● Separar la lógica del sistema de la gestión de datos 
+● Utilizar módulos de JavaScript
+
+Desafío adicional 
+Agregar un sistema de roles de usuario. Tipos de usuario: 
+● Administrador 
+● Visitante 
+Permisos: 
+Administrador: 
+● Puede agregar animales 
+● Puede eliminar animales 
+● Puede modificar animales 
+Visitante: 
+● Solo puede visualizar la lista de animales
+
