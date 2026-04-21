@@ -1,19 +1,20 @@
-class Mamifero extends Animal {
-    constructor(id, nombre, especie, clase) {
-        super(id, nombre, especie, clase);
+import { Animal } from './animal.js';
+
+export class Mamifero extends Animal {
+    constructor(id, nombre, especie, claseAnimal, esMamifero) {
+        super(id, nombre, especie, claseAnimal);
+        this.esMamifero = esMamifero;
     }
 
     emitirSonido() {
-        console.log("El mamifero emite un sonido");
+        return "El mamífero emite un sonido.";
     }
 
     tipoMovimiento() {
-        console.log("El mamifero se mueve");
+        return "El mamífero se mueve.";
     }
 
     mostrarInformacion() {
-        super.mostrarInformacion();
-        this.emitirSonido();
-        this.tipoMovimiento();
+        return `${super.mostrarInformacion()}, Es Mamífero: ${this.esMamifero ? 'Sí' : 'No'}`;
     }
 }
