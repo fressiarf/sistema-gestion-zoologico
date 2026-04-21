@@ -1,0 +1,254 @@
+
+
+.solid-nav {
+    background-color: var(--primary-green);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.solid-nav .nav-links a.active {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+    padding-bottom: 5px;
+}
+
+.page-hero {
+    height: 50vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(26, 81, 39, 0.3), rgba(0, 0, 0, 0.5));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 20px;
+}
+
+.page-hero h1 {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.page-hero h1 span {
+    color: var(--accent-yellow);
+}
+
+.page-hero p {
+    font-size: 1.3rem;
+    font-weight: 300;
+    max-width: 700px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.horarios-container {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.info-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid var(--primary-green);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.info-card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.schedule-list,
+.facility-list {
+    list-style: none;
+    padding: 0;
+}
+
+.schedule-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.schedule-list li .day {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.schedule-list li .time {
+    color: var(--primary-green);
+    font-weight: 800;
+}
+
+.schedule-list li.closed-day .time {
+    color: #e53e3e;
+}
+
+.schedule-list li.holiday {
+    background: rgba(241, 181, 28, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+.schedule-list li.holiday .time {
+    color: var(--accent-yellow-hover);
+}
+
+.note {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.facility-list li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.facility-list li strong {
+    color: var(--text-main);
+}
+
+
+.location-section {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    padding: 40px 20px 20px;
+    font-weight: 800;
+}
+
+.section-title span {
+    color: var(--accent-yellow);
+}
+
+.location-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+    .location-content {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.map-placeholder {
+    background: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop') center/cover;
+    min-height: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-overlay {
+    background: rgba(26, 81, 39, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(5px);
+}
+
+.map-overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.btn-directions {
+    margin-top: 20px;
+    background: var(--accent-yellow);
+    color: #432e01;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-directions:hover {
+    background: white;
+    color: var(--primary-green);
+    transform: scale(1.05);
+}
+
+.directions-text {
+    padding: 50px;
+    background: var(--bg-body);
+}
+
+.directions-text h3 {
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.directions-text p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}

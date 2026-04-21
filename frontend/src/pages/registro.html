@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Zoo Manager</title>
+    <link rel="stylesheet" href="../css/registro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="app">
+        <main class="view">
+            <div class="auth-box glass-panel" style="position: relative; padding-top: 5rem;">
+                <a href="./index.html" class="back-home-btn"><i class="ph ph-arrow-left"></i> Volver al Inicio</a>
+                <h1>Zoo<span>Manager</span></h1>
+                <p>Registro de Empleados y Visitas</p>
+                <form id="register-form">
+                    <div class="input-group">
+                        <input type="text" id="username" placeholder="Elige tu nombre de Usuario" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Digita una Contraseña" required>
+                    </div>
+                    <div class="input-group">
+                        <select id="register-role" required>
+                            <option value="Administrador">Cuenta Administrador</option>
+                            <option value="Visitante" selected>Cuenta Visitante</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-secondary">Registrarse</button>
+                    <p id="auth-msg" class="msg"></p>
+                </form>
+                <div class="links-container">
+                    <a href="./login.html">Volver al Inicio de Sesión</a>
+                    <hr style="margin: 15px 0; border: none; border-top: 1px solid #eee;">
+                    <a href="./index.html" style="color: var(--text-muted); font-weight: 400;">Regresar al Inicio del Sitio</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="../../../backend/js/registro.js"></script>
+</body>
+</html>
+

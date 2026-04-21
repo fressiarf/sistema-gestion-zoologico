@@ -18,3 +18,4 @@ export class Ave extends Animal {
         return `${super.mostrarInformacion()}, Es Ave: ${this.esAve ? 'Sí' : 'No'}`;
     }
 }
+

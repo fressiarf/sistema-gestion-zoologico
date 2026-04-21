@@ -22,3 +22,4 @@ export class Animal {
         return `ID: ${this.id}, Nombre: ${this.nombre}, Especie: ${this.especie}, Clase Animal: ${this.claseAnimal}`;
     }
 }
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Zoo Manager</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div id="app">
+        <main class="view">
+            <div class="auth-box glass-panel" style="position: relative; padding-top: 5rem;">
+                <a href="./index.html" class="back-home-btn"><i class="ph ph-arrow-left"></i> Volver al Inicio</a>
+                <h1>Zoo<span>Manager</span></h1>
+                <p>Ingreso al Sistema</p>
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="text" id="username" placeholder="Usuario" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Entrar al Sistema</button>
+                    <p id="auth-msg" class="msg"></p>
+                </form>
+                <div class="links-container">
+                    <a href="./registro.html">¿No tienes cuenta? Crea una aquí</a>
+                    <hr style="margin: 15px 0; border: none; border-top: 1px solid #eee;">
+                    <a href="./index.html" style="color: var(--text-muted); font-weight: 400;">Regresar al Inicio del Sitio</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="../../../backend/js/login.js"></script>
+</body>
+</html>
+

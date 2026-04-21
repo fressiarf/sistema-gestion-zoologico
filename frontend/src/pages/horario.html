@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horarios y Ubicación - Zoológico TerraNova</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/horario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <nav class="glass-header landing-header solid-nav">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <div class="nav-links">
+            <a href="./index.html">Inicio</a>
+            <a href="./recinto.html">Recintos</a>
+            <a href="./membresia.html">Membresías</a>
+            <a href="./horario.html" class="active">Horarios</a>
+            <a href="./login.html" id="btn-intranet" class="btn-outline btn-nav">Inicio de Sesión</a>
+            <a href="#" id="btn-logout" class="btn-logout" style="display:none;"><i class="ph ph-sign-out"></i> Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <header class="page-hero hero-horarios">
+        <img src="https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&w=1920"
+            alt="Horarios" class="hero-bg-img">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Planifica tu <span>Visita</span></h1>
+            <p>Toda la información que necesitas para una experiencia<br>inolvidable en el corazón natural de la ciudad.</p>
+        </div>
+    </header>
+
+    <main class="horarios-container">
+        <section class="info-grid">
+            <div class="info-card">
+                <div class="card-icon"><i class="ph ph-clock"></i></div>
+                <h3>Horarios de Atención</h3>
+                <ul class="schedule-list">
+                    <li>
+                        <span class="day" id="h-diasAbierto">Martes a Domingo</span>
+                        <span class="time"><span id="h-apertura">9:00 AM</span> - <span id="h-cierre">4:00 PM</span></span>
+                    </li>
+                    <li class="closed-day">
+                        <span class="day" id="h-diasCerrado">Lunes</span>
+                        <span class="time">CERRADO (<span id="h-motivoCierre">Mantenimiento</span>)</span>
+                    </li>
+                    <li class="holiday">
+                        <span class="day">Días Festivos</span>
+                        <span class="time"><span id="h-apertura2">9:00 AM</span> - <span id="h-cierre2">4:00 PM</span></span>
+                    </li>
+                </ul>
+                <p class="note" id="h-notaTaquilla">* Las taquillas cierran a las 3:30 PM. Sugerimos llegar temprano para disfrutar de todos los recintos.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon"><i class="ph ph-car-profile"></i></div>
+                <h3>Servicios y Facilidades</h3>
+                <ul class="facility-list">
+                    <li><strong>Estacionamiento:</strong> Amplio parqueo seguro con tarifa fija de <span id="h-estacionamiento">Q20 por día</span>.</li>
+                    <li><strong>Alimentación:</strong> Plazas de comida, kioscos de snacks y áreas de picnic disponibles.</li>
+                    <li><strong>Accesibilidad:</strong> Rampas y senderos pavimentados en todo el parque. Alquiler de sillas de ruedas (Sujeto a disponibilidad).</li>
+                    <li><strong>Seguridad:</strong> Personal de seguridad privada, cámaras 24/7 y puesto de primeros auxilios.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="location-section">
+            <h2 class="section-title"><i class="ph ph-map-pin"></i> Cómo <span>Llegar</span></h2>
+            <div class="location-content">
+                <div class="map-placeholder">
+                    <div class="map-overlay">
+                        <h3>Finca Nacional TerraNova</h3>
+                        <p id="h-ubicacion">Zona 13, Ciudad de Guatemala</p>
+                        <button class="btn-directions"
+                            onclick="Swal.fire('Google Maps', 'Abriendo indicaciones en Google Maps...', 'success')">Obtener
+                            Direcciones</button>
+                    </div>
+                </div>
+                <div class="directions-text">
+                    <h3>Indicaciones Generales</h3>
+                    <p>Estamos ubicados en la zona 13 de la Ciudad de Guatemala, muy cerca del Aeropuerto Internacional TerraNova.</p>
+                    <p><strong>En vehículo propio:</strong> Ingresa por el Boulevard Liberación o la Avenida Hincapié. Sigue las señales hacia el Aeropuerto/Zoológico.</p>
+                    <p><strong>Transporte Público:</strong> Varias rutas del Transmetro y autobuses urbanos tienen paradas a pocos minutos caminando de la entrada principal.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h2>Zoo<span>TerraNova</span></h2>
+        <p>Desarrollado para el Sistema de Gestión (POO). 2026.</p>
+    </footer>
+
+    <script type="module">
+        import { Autenticacion } from '../../../backend/classes/autenticacion.js';
+        import { DataService } from '../../../backend/services/dataService.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const h = DataService.get('horarios');
+            document.getElementById('h-diasAbierto').textContent = h.diasAbierto;
+            document.getElementById('h-apertura').textContent = h.apertura;
+            document.getElementById('h-apertura2').textContent = h.apertura;
+            document.getElementById('h-cierre').textContent = h.cierre;
+            document.getElementById('h-cierre2').textContent = h.cierre;
+            document.getElementById('h-diasCerrado').textContent = h.diasCerrado;
+            document.getElementById('h-motivoCierre').textContent = h.motivoCierre;
+            document.getElementById('h-notaTaquilla').textContent = h.notaTaquilla;
+            document.getElementById('h-estacionamiento').textContent = h.estacionamiento;
+            document.getElementById('h-ubicacion').textContent = h.ubicacion;
+
+            const user = Autenticacion.obtenerUsuarioActual();
+            const btnIntranet = document.getElementById('btn-intranet');
+            const btnLogout = document.getElementById('btn-logout');
+            if (user) {
+                btnLogout.style.display = 'inline-block';
+                if (user.rol === 'Visitante') {
+                    btnIntranet.style.display = 'none';
+                } else if (user.rol === 'Administrador') {
+                    btnIntranet.textContent = 'Panel de Control';
+                    btnIntranet.href = './dashboard.html';
+                }
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Swal.fire({ title: '¿Cerrar sesión?', icon: 'question', showCancelButton: true, confirmButtonColor: '#1a5127', cancelButtonColor: '#d33', confirmButtonText: 'Sí, salir', cancelButtonText: 'Cancelar' })
+                        .then(r => { if (r.isConfirmed) { Autenticacion.logout(); window.location.reload(); } });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

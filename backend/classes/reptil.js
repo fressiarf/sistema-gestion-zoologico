@@ -18,3 +18,4 @@ export class Reptil extends Animal {
         return `${super.mostrarInformacion()}, Es Reptil: ${this.esReptil ? 'Sí' : 'No'}`;
     }
 }
+

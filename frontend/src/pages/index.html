@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoológico TerraNova - Vive la Experiencia</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <nav class="glass-header landing-header">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <div class="nav-links">
+            <a href="./recinto.html">Recintos</a>
+            <a href="./membresia.html">Membresías</a>
+            <a href="./horario.html">Horarios</a>
+            <a href="./login.html" id="btn-intranet" class="btn-outline btn-nav">Inicio de Sesión</a>
+            <a href="#" id="btn-logout" class="btn-logout" style="display:none;"><i class="ph ph-sign-out"></i> Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1 id="hero-titulo">Explora la <span id="hero-titulo-span">Aventura Natural</span></h1>
+        <p id="hero-subtitulo">Descubre, aprende y enamórate de la inmensa biodiversidad. Cientos de especies y espacios ecológicos te esperan en el corazón natural de la ciudad.</p>
+        <a href="./membresia.html" class="btn-cta" id="hero-btn">Adquirir Entradas</a>
+    </header>
+
+    <section id="sobre-nosotros" class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Nuestra <span>Historia</span> y Misión</h2>
+                <p id="sobre-p1">Ubicado en el corazón de la ciudad, el Zoológico TerraNova es mucho más que un parque recreativo; somos un centro vital para la preservación de la vida silvestre y la educación ambiental en toda la región.</p>
+                <p id="sobre-p2">Fundado hace más de cuatro décadas, nuestro principal propósito ha sido crear un puente entre el ser humano y el reino natural. Trabajamos incansablemente junto a biólogos y veterinarios expertos para rehabilitar especies, reproducir aquellas en peligro de extinción y educar a las nuevas generaciones sobre la importancia de proteger nuestro frágil ecosistema.</p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <i class="ph ph-paw-print"></i>
+                        <h3 id="stat1-num">+500</h3>
+                        <span id="stat1-label">Especies Rescatadas</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="ph ph-tree-evergreen"></i>
+                        <h3 id="stat2-num">+50</h3>
+                        <span id="stat2-label">Hectáreas Verdes</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="ph ph-users-three"></i>
+                        <h3 id="stat3-num">1M</h3>
+                        <span id="stat3-label">Visitantes Anuales</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="../img/lading page.jpg" alt="Cuidado de animales en TerraNova">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <p>Desarrollado para el Sistema de Gestión (POO). 2026.</p>
+    </footer>
+
+    <script type="module">
+        import { Autenticacion } from '../../../backend/classes/autenticacion.js';
+        import { DataService } from '../../../backend/services/dataService.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const d = DataService.get('landing');
+            document.getElementById('hero-titulo').innerHTML = `${d.heroTitulo} <span id="hero-titulo-span">${d.heroTituloSpan}</span>`;
+            document.getElementById('hero-subtitulo').textContent = d.heroSubtitulo;
+            document.getElementById('hero-btn').textContent = d.heroBtnTexto;
+            document.getElementById('sobre-p1').textContent = d.sobreNosotrosP1;
+            document.getElementById('sobre-p2').textContent = d.sobreNosotrosP2;
+            document.getElementById('stat1-num').textContent = d.stat1Num;
+            document.getElementById('stat1-label').textContent = d.stat1Label;
+            document.getElementById('stat2-num').textContent = d.stat2Num;
+            document.getElementById('stat2-label').textContent = d.stat2Label;
+            document.getElementById('stat3-num').textContent = d.stat3Num;
+            document.getElementById('stat3-label').textContent = d.stat3Label;
+
+            const user = Autenticacion.obtenerUsuarioActual();
+            const btnIntranet = document.getElementById('btn-intranet');
+            const btnLogout = document.getElementById('btn-logout');
+
+            if (user) {
+                btnLogout.style.display = 'inline-block';
+                if (user.rol === 'Visitante') {
+                    btnIntranet.style.display = 'none';
+                } else if (user.rol === 'Administrador') {
+                    btnIntranet.textContent = 'Panel de Control';
+                    btnIntranet.href = './dashboard.html';
+                }
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: '¿Cerrar sesión?',
+                        text: 'Tendrás que volver a ingresar para acceder a funciones administrativas.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#1a5127',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, salir',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Autenticacion.logout();
+                            window.location.reload();
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

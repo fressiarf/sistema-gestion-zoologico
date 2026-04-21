@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recintos - Zoológico TerraNova</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/recinto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <nav class="glass-header landing-header solid-nav">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <div class="nav-links">
+            <a href="./index.html">Inicio</a>
+            <a href="./recinto.html" class="active">Recintos</a>
+            <a href="./membresia.html">Membresías</a>
+            <a href="./horario.html">Horarios</a>
+            <a href="./login.html" id="btn-intranet" class="btn-outline btn-nav">Inicio de Sesión</a>
+            <a href="#" id="btn-logout" class="btn-logout" style="display:none;"><i class="ph ph-sign-out"></i> Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <header class="page-hero hero-recintos">
+        <img src="https://images.pexels.com/photos/1054655/pexels-photo-1054655.jpeg?auto=compress&cs=tinysrgb&w=1920"
+            alt="Recintos" class="hero-bg-img">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Nuestros <span>Recintos</span></h1>
+            <p>Explora la diversidad de hábitats que albergan a miles de especies de todo el planeta.</p>
+        </div>
+    </header>
+
+    <main class="recintos-container" id="recintos-container"></main>
+
+    <footer class="footer">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <p>Desarrollado para el Sistema de Gestión (POO). 2026.</p>
+    </footer>
+
+    <script type="module">
+        import { Autenticacion } from '../../../backend/classes/autenticacion.js';
+        import { DataService } from '../../../backend/services/dataService.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const recintos = DataService.get('recintos');
+            const container = document.getElementById('recintos-container');
+            container.innerHTML = '';
+
+            recintos.forEach(r => {
+                const animalesHTML = r.animales.map(a => `
+                    <div class="feature-box">
+                        <img src="${a.imagen}" class="feature-img" alt="${a.nombre}"
+                            onerror="this.src='https://images.unsplash.com/photo-1549480017-d76466a4b7e8?q=80&w=600&auto=format&fit=crop'">
+                        <div class="feature-info">
+                            <h3>${a.nombre}</h3>
+                            <p>${a.descripcion}</p>
+                        </div>
+                    </div>
+                `).join('');
+
+                const section = document.createElement('section');
+                section.className = 'region-section';
+                section.innerHTML = `
+                    <h2 class="region-title">${r.region.replace(/([\w]+)([\s\w]*)/, (m, p1, p2) => `${p1}<span>${p2}</span>`)}</h2>
+                    <p class="region-desc">${r.descripcion}</p>
+                    <div class="features">${animalesHTML}</div>
+                `;
+                container.appendChild(section);
+            });
+
+            const user = Autenticacion.obtenerUsuarioActual();
+            const btnIntranet = document.getElementById('btn-intranet');
+            const btnLogout = document.getElementById('btn-logout');
+            if (user) {
+                btnLogout.style.display = 'inline-block';
+                if (user.rol === 'Visitante') {
+                    btnIntranet.style.display = 'none';
+                } else if (user.rol === 'Administrador') {
+                    btnIntranet.textContent = 'Panel de Control';
+                    btnIntranet.href = './dashboard.html';
+                }
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Swal.fire({ title: '¿Cerrar sesión?', icon: 'question', showCancelButton: true, confirmButtonColor: '#1a5127', cancelButtonColor: '#d33', confirmButtonText: 'Sí, salir', cancelButtonText: 'Cancelar' })
+                        .then(rr => { if (rr.isConfirmed) { Autenticacion.logout(); window.location.reload(); } });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+
+
+.solid-nav {
+    background-color: var(--primary-green);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.solid-nav .nav-links a.active {
+    color: var(--accent-yellow);
+    border-bottom: 2px solid var(--accent-yellow);
+    padding-bottom: 5px;
+}
+
+.page-hero {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(26, 81, 39, 0.3), rgba(0, 0, 0, 0.5));
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 20px;
+}
+
+.page-hero h1 {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.page-hero h1 span {
+    color: var(--accent-yellow);
+}
+
+.page-hero p {
+    font-size: 1.3rem;
+    font-weight: 300;
+    max-width: 700px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.recintos-container {
+    padding: 60px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.region-section {
+    margin-bottom: 80px;
+}
+
+.region-title {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.region-title span {
+    color: var(--accent-yellow);
+}
+
+.region-desc {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.feature-box {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 360px;
+    box-shadow: 0 15px 35px rgba(26, 81, 39, 0.1);
+    transition: transform 0.4s;
+    border-bottom: 5px solid var(--primary-green);
+}
+
+.feature-box:hover {
+    transform: translateY(-15px);
+    border-bottom-color: var(--accent-yellow);
+}
+
+.feature-img {
+    height: 260px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.feature-info {
+    padding: 30px;
+}
+
+.feature-info h3 {
+    color: var(--primary-green);
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.feature-info p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}

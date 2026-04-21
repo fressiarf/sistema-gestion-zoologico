@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membresías - Zoológico TerraNova</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/membresia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <nav class="glass-header landing-header solid-nav">
+        <h2><i class="ph ph-tree-evergreen"></i> Zoo<span>TerraNova</span></h2>
+        <div class="nav-links">
+            <a href="./index.html">Inicio</a>
+            <a href="./recinto.html">Recintos</a>
+            <a href="./membresia.html" class="active">Membresías</a>
+            <a href="./horario.html">Horarios</a>
+            <a href="./login.html" id="btn-intranet" class="btn-outline btn-nav">Inicio de Sesión</a>
+            <a href="#" id="btn-logout" class="btn-logout" style="display:none;"><i class="ph ph-sign-out"></i> Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <header class="page-hero hero-membresias" style="background: linear-gradient(rgba(26,81,39,0.5), rgba(0,0,0,0.7)), url('../img/membresia_hero.png') center/cover no-repeat;">
+        <div class="hero-content">
+            <h1>Adquiere tu<br><span>Pase</span></h1>
+            <p>Conviértete en parte de la familia TerraNova y disfruta de beneficios exclusivos<br>mientras apoyas la conservación de especies.</p>
+        </div>
+    </header>
+
+    <section id="membresias" class="section-container">
+        <h2 class="section-title">Elige tu <span>Membresía</span> Ideal</h2>
+        <p class="membresia-subtitle">Tenemos opciones para cada tipo de explorador.<br>Encuentra el plan que mejor se adapte a ti y tu familia.</p>
+
+        <div class="pricing-grid" id="pricing-grid"></div>
+    </section>
+
+    <section class="support-conservation">
+        <div class="support-content">
+            <h2>Apoya la <span>Conservación</span></h2>
+            <p>El 100% de los ingresos de nuestras membresías anuales y benefactores se destinan a nuestros programas de rescate, rehabilitación y reinserción de especies en peligro de extinción.</p>
+        </div>
+    </section>
+
+    <section class="additional-info">
+        <div class="section-container">
+            <h2 class="section-title">Beneficios <span>Exclusivos</span> para Socios</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="ph ph-calendar-star"></i>
+                    <h3>Eventos Especiales</h3>
+                    <p>Acceso anticipado a inauguraciones de recintos y eventos temáticos durante todo el año.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="ph ph-gift"></i>
+                    <h3>Descuentos en Tiendas</h3>
+                    <p>Ahorra desde un 10% hasta un 25% en todos nuestros puntos de venta de souvenirs y snacks.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="ph ph-newspaper-clipping"></i>
+                    <h3>Boletín Informativo</h3>
+                    <p>Recibe noticias exclusivas sobre nacimientos, rescates y avances científicos de nuestro equipo.</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="ph ph-shield-check"></i>
+                    <h3>Seguro del Visitante</h3>
+                    <p>Todas nuestras membresías incluyen un seguro de accidentes dentro de las instalaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-container">
+            <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>¿Cómo recibo mi carné físico?</h4>
+                    <p>Puedes recoger tu carné personalizado en la oficina de membresías (entrada principal) presentando tu comprobante digital y una identificación.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿La membresía familiar es transferible?</h4>
+                    <p>Los titulares (adultos) deben ser siempre los mismos, pero puedes cambiar a los acompañantes infantiles en cada visita.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Puedo subir de nivel mi membresía?</h4>
+                    <p>¡Claro! Solo debes pagar la diferencia proporcional al tiempo restante de tu membresía actual.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>¿Hay descuentos para empresas?</h4>
+                    <p>Sí, ofrecemos planes corporativos para grupos de más de 20 empleados. Contáctanos en el área administrativa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h2>Zoo<span>TerraNova</span></h2>
+        <p>Desarrollado para el Sistema de Gestión (POO). 2026.</p>
+    </footer>
+
+    <script type="module">
+        import { Autenticacion } from '../../../backend/classes/autenticacion.js';
+        import { DataService } from '../../../backend/services/dataService.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const membresias = DataService.get('membresias');
+            const grid = document.getElementById('pricing-grid');
+            grid.innerHTML = '';
+
+            membresias.forEach(m => {
+                const beneficiosHTML = m.beneficios.map(b => `<li><i class="ph ph-check-circle"></i> ${b}</li>`).join('');
+                const noIncluyeHTML = (m.noIncluye || []).map(n => `<li class="disabled"><i class="ph ph-x-circle"></i> ${n}</li>`).join('');
+                const ribbonHTML = m.popular ? `<div class="ribbon">Más Popular</div>` : '';
+                const cardClass = `pricing-card ${m.popular ? 'vip-card' : ''} ${m.premium ? 'premium-card' : ''}`;
+                const btnClass = `btn-pricing ${m.popular ? 'popular' : ''} ${m.premium ? 'premium-btn' : ''}`;
+
+                const card = document.createElement('div');
+                card.className = cardClass;
+                card.innerHTML = `
+                    ${ribbonHTML}
+                    <h3>${m.nombre}</h3>
+                    <div class="price">Q${m.precio}<span>${m.periodo}</span></div>
+                    <ul class="benefits-list">
+                        ${beneficiosHTML}
+                        ${noIncluyeHTML}
+                    </ul>
+                    <a href="javascript:void(0)" class="${btnClass}"
+                        onclick="Swal.fire('¡Próximamente!', 'La pasarela de pago virtual está en construcción.', 'info')">
+                        Comprar
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+
+            const user = Autenticacion.obtenerUsuarioActual();
+            const btnIntranet = document.getElementById('btn-intranet');
+            const btnLogout = document.getElementById('btn-logout');
+            if (user) {
+                btnLogout.style.display = 'inline-block';
+                if (user.rol === 'Visitante') {
+                    btnIntranet.style.display = 'none';
+                } else if (user.rol === 'Administrador') {
+                    btnIntranet.textContent = 'Panel de Control';
+                    btnIntranet.href = './dashboard.html';
+                }
+                btnLogout.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Swal.fire({ title: '¿Cerrar sesión?', icon: 'question', showCancelButton: true, confirmButtonColor: '#1a5127', cancelButtonColor: '#d33', confirmButtonText: 'Sí, salir', cancelButtonText: 'Cancelar' })
+                        .then(r => { if (r.isConfirmed) { Autenticacion.logout(); window.location.reload(); } });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

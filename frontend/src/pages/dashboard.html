@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Zoo TerraNova</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div id="app" class="hidden">
+        <main id="dashboard-view" class="view" style="justify-content: flex-start; align-items: stretch;">
+
+            <nav class="glass-header">
+                <h2>Zoo<span>TerraNova</span> Admin</h2>
+                <div class="user-controls">
+                    <span id="user-display"></span>
+                    <a href="./index.html" class="btn-outline" style="text-decoration:none; margin-right:1rem;">Ver Sitio</a>
+                    <button id="btn-logout" class="btn-outline">Cerrar Sesión</button>
+                </div>
+            </nav>
+
+            <div class="admin-layout">
+                <aside class="admin-sidebar">
+                    <nav class="sidebar-nav">
+                        <button class="tab-btn active" data-tab="animales"><i class="ph ph-paw-print"></i> Animales</button>
+                        <button class="tab-btn" data-tab="horarios"><i class="ph ph-clock"></i> Horarios</button>
+                        <button class="tab-btn" data-tab="membresias"><i class="ph ph-ticket"></i> Membresías</button>
+                        <button class="tab-btn" data-tab="recintos"><i class="ph ph-tree-evergreen"></i> Recintos</button>
+                        <button class="tab-btn" data-tab="landing"><i class="ph ph-house"></i> Landing Page</button>
+                    </nav>
+                </aside>
+
+                <div class="admin-content">
+
+                    <section id="tab-animales" class="tab-section active">
+                        <div class="section-header">
+                            <h2><i class="ph ph-paw-print"></i> Directorio de Animales</h2>
+                            <span class="badge" id="animal-stats">Total: 0</span>
+                        </div>
+                        <div class="two-col">
+                            <div class="glass-panel form-panel">
+                                <h3>Registrar Animal</h3>
+                                <form id="animal-form">
+                                    <div class="input-group">
+                                        <label>Nombre</label>
+                                        <input type="text" id="animal-name" placeholder="Ej: Simba" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Especie</label>
+                                        <input type="text" id="animal-species" placeholder="Ej: León africano" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Clase</label>
+                                        <select id="animal-class" required>
+                                            <option value="" disabled selected>Seleccionar clase</option>
+                                            <option value="Mamifero">Mamífero</option>
+                                            <option value="Ave">Ave</option>
+                                            <option value="Reptil">Reptil</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn-primary">Añadir al Directorio</button>
+                                </form>
+                            </div>
+                            <div class="glass-panel list-panel">
+                                <h3>Registro Activo</h3>
+                                <div class="animal-grid" id="animal-grid"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tab-horarios" class="tab-section">
+                        <div class="section-header">
+                            <h2><i class="ph ph-clock"></i> Gestión de Horarios</h2>
+                            <button class="btn-save" id="save-horarios"><i class="ph ph-floppy-disk"></i> Guardar Cambios</button>
+                        </div>
+                        <div class="glass-panel form-panel-full">
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Días Abierto</label>
+                                    <input type="text" id="h-diasAbierto" placeholder="Ej: Martes a Domingo">
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora de Apertura</label>
+                                    <input type="text" id="h-apertura" placeholder="Ej: 9:00 AM">
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora de Cierre</label>
+                                    <input type="text" id="h-cierre" placeholder="Ej: 4:00 PM">
+                                </div>
+                                <div class="input-group">
+                                    <label>Día Cerrado</label>
+                                    <input type="text" id="h-diasCerrado" placeholder="Ej: Lunes">
+                                </div>
+                                <div class="input-group">
+                                    <label>Motivo de Cierre</label>
+                                    <input type="text" id="h-motivoCierre" placeholder="Ej: Mantenimiento">
+                                </div>
+                                <div class="input-group">
+                                    <label>Tarifa de Estacionamiento</label>
+                                    <input type="text" id="h-estacionamiento" placeholder="Ej: Q20 por día">
+                                </div>
+                                <div class="input-group full-width">
+                                    <label>Nota adicional</label>
+                                    <input type="text" id="h-notaTaquilla" placeholder="Nota sobre taquillas, etc.">
+                                </div>
+                                <div class="input-group full-width">
+                                    <label>Ubicación</label>
+                                    <input type="text" id="h-ubicacion" placeholder="Ej: Zona 13, Ciudad de Guatemala">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tab-membresias" class="tab-section">
+                        <div class="section-header">
+                            <h2><i class="ph ph-ticket"></i> Gestión de Membresías</h2>
+                        </div>
+                        <div id="membresias-list" class="membresias-grid"></div>
+                    </section>
+
+                    <section id="tab-recintos" class="tab-section">
+                        <div class="section-header">
+                            <h2><i class="ph ph-tree-evergreen"></i> Gestión de Recintos</h2>
+                        </div>
+                        <div id="recintos-list" class="recintos-admin-list"></div>
+                    </section>
+
+                    <section id="tab-landing" class="tab-section">
+                        <div class="section-header">
+                            <h2><i class="ph ph-house"></i> Editar Landing Page</h2>
+                            <button class="btn-save" id="save-landing"><i class="ph ph-floppy-disk"></i> Guardar Cambios</button>
+                        </div>
+                        <div class="glass-panel form-panel-full">
+                            <h3>Sección Hero (Portada)</h3>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Título Principal</label>
+                                    <input type="text" id="l-heroTitulo" placeholder="Ej: Explora la">
+                                </div>
+                                <div class="input-group">
+                                    <label>Palabra Destacada (amarilla)</label>
+                                    <input type="text" id="l-heroTituloSpan" placeholder="Ej: Aventura Natural">
+                                </div>
+                                <div class="input-group full-width">
+                                    <label>Subtítulo del Hero</label>
+                                    <textarea id="l-heroSubtitulo" rows="3" placeholder="Descripción de la portada..."></textarea>
+                                </div>
+                                <div class="input-group">
+                                    <label>Texto del Botón</label>
+                                    <input type="text" id="l-heroBtnTexto" placeholder="Ej: Adquirir Entradas">
+                                </div>
+                            </div>
+                            <hr style="margin: 2rem 0; border:none; border-top: 1px solid var(--border);">
+                            <h3>Sección Sobre Nosotros</h3>
+                            <div class="form-grid">
+                                <div class="input-group full-width">
+                                    <label>Párrafo 1</label>
+                                    <textarea id="l-sobreNosotrosP1" rows="3"></textarea>
+                                </div>
+                                <div class="input-group full-width">
+                                    <label>Párrafo 2</label>
+                                    <textarea id="l-sobreNosotrosP2" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <hr style="margin: 2rem 0; border:none; border-top: 1px solid var(--border);">
+                            <h3>Estadísticas</h3>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Estadística 1 - Número</label>
+                                    <input type="text" id="l-stat1Num">
+                                </div>
+                                <div class="input-group">
+                                    <label>Estadística 1 - Etiqueta</label>
+                                    <input type="text" id="l-stat1Label">
+                                </div>
+                                <div class="input-group">
+                                    <label>Estadística 2 - Número</label>
+                                    <input type="text" id="l-stat2Num">
+                                </div>
+                                <div class="input-group">
+                                    <label>Estadística 2 - Etiqueta</label>
+                                    <input type="text" id="l-stat2Label">
+                                </div>
+                                <div class="input-group">
+                                    <label>Estadística 3 - Número</label>
+                                    <input type="text" id="l-stat3Num">
+                                </div>
+                                <div class="input-group">
+                                    <label>Estadística 3 - Etiqueta</label>
+                                    <input type="text" id="l-stat3Label">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script type="module" src="../../../backend/js/dashboard.js"></script>
+</body>
+</html>
